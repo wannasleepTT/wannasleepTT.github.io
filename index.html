@@ -1,1 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>OvO的个人主页 </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            color: #1e2a3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* 头部区域 */
+        .hero {
+            background: #ffffff;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, #2b6cb0, #3182ce);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .avatar span {
+            font-size: 3rem;
+            color: white;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #1e2a3e, #2c5282);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.01em;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-top: 0.5rem;
+            border-top: 2px solid #e2e8f0;
+            display: inline-block;
+            padding-top: 0.75rem;
+        }
+
+        /* 主体内容区域 */
+        .content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 4px solid #3182ce;
+            padding-left: 1rem;
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+        }
+
+        .intro-text {
+            font-size: 1.05rem;
+            color: #2d3748;
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 技能标签 */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-tag {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 0.35rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e293b;
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: #3182ce;
+            border-color: #3182ce;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 项目卡片网格 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            transition: all 0.25s;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eef2f6;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-link {
+            font-size: 0.8rem;
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 社交链接区域 */
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .social-link {
+            background: #f1f5f9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .social-link:hover {
+            background: #3182ce;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* 简单响应式调整 */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 2rem 1rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头像 + 名称 -->
+    <div class="hero">
+        <div class="avatar">
+            <span>👨‍💻</span>
+        </div>
+        <h1>OvO</h1>
+        <div class="tagline">小白</div>
+    </div>
+
+    <!-- 主要内容区 -->
+    <div class="content">
+        <!-- 简介 -->
+        <div class="section">
+            <div class="section-title">
+                <span>📄</span> 关于我
+            </div>
+            <div class="intro-text">
+                你好！我是一个小白。
+        </div>
+
+        <!-- 技能标签 -->
+        <div class="section">
+            <div class="section-title">
+                <span>⚙️</span> 技术栈
+            </div>
+            <div class="skills">
+                <span class="skill-tag">pass</span>
+            </div>
+        </div>
+
+        <!-- 近期项目 -->
+        <div class="section">
+            <div class="section-title">
+                <span>📌</span> 项目展示
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-title">
+                        <span>🔭</span> pass
+                    </div>
+                    <div class="project-desc">content</div>
+                    <a href="#" class="project-link">了解更多 →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-title">
+                        <span>🎨</span> pass
+                    </div>
+                    <div class="project-desc">content</div>
+                    <a href="#" class="project-link">了解更多 →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-title">
+                        <span>📊</span> pass
+                    </div>
+                    <div class="project-desc">content</div>
+                    <a href="#" class="project-link">了解更多 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 社交 & 联系 -->
+        <div class="section">
+            <div class="section-title">
+                <span>🤝</span> 联系我
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/你的用户名" class="social-link" target="_blank">🐙 GitHub</a>
+                <a href="#" class="social-link">📧 邮箱</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        © OvO
+    </div>
+</div>
+</body>
+</html>
